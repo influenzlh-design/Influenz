@@ -16,6 +16,7 @@ Usage:
 """
 
 import subprocess
+import sys
 import time
 import argparse
 import logging
@@ -47,7 +48,7 @@ class QueenAgent:
     def run_scout_cycle(self) -> None:
         self.announce("DEPLOY: Scout agent — scanning YouTube for trending topics.")
         result = subprocess.run(
-            ["python", "scout_agent.py", "--run-now"],
+            [sys.executable, "scout_agent.py", "--run-now"],
             capture_output=False,
         )
         if result.returncode != 0:
@@ -56,7 +57,7 @@ class QueenAgent:
     def run_forager_cycle(self) -> None:
         self.announce("DEPLOY: Forager agent — generating scripts from queued topics.")
         result = subprocess.run(
-            ["python", "forager_agent.py", "--run-now"],
+            [sys.executable, "forager_agent.py", "--run-now"],
             capture_output=False,
         )
         if result.returncode != 0:
@@ -65,7 +66,7 @@ class QueenAgent:
     def run_worker_cycle(self) -> None:
         self.announce("DEPLOY: Worker agent — preparing approved scripts for production.")
         result = subprocess.run(
-            ["python", "worker_agent.py"],
+            [sys.executable, "worker_agent.py"],
             capture_output=False,
         )
         if result.returncode != 0:
